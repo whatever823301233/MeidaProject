@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.qiang.meidaproject.ui.activity.RecentPlayActivity">
+
+    <include layout="@layout/include_toolbar" android:id="@+id/toolbar_container"/>
+
+    <LinearLayout
+        android:id="@+id/ll_operating"
+        android:layout_below="@+id/toolbar_container"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="48dp">
+        <LinearLayout
+            android:layout_weight="3"
+            android:gravity="center_vertical"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent">
+            <ImageView
+                android:layout_marginStart="16dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+            <TextView
+
+                android:text="随机播放"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+            <Spinner
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
+            <TextView
+                android:text="多选"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+        </LinearLayout>
+       <LinearLayout
+           android:layout_weight="1"
+           android:gravity="center"
+           android:orientation="horizontal"
+           android:layout_width="wrap_content"
+           android:layout_height="match_parent">
+           <TextView
+               android:text="多选"
+               android:gravity="center"
+               android:layout_width="match_parent"
+               android:layout_height="match_parent"/>
+       </LinearLayout>
+
+    </LinearLayout>
+
+    <android.support.v7.widget.RecyclerView
+        android:layout_below="@+id/ll_operating"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+    <FrameLayout
+        android:layout_alignParentBottom="true"
+        android:layout_width="match_parent"
+        android:background="@color/md_grey_800"
+        android:layout_marginBottom="48dp"
+        android:layout_height="80dp">
+
+        <LinearLayout
+            android:layout_marginStart="16dp"
+            android:weightSum="1"
+            android:gravity="center"
+            android:layout_gravity="start|center_vertical"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+            <ImageView
+                android:src="@drawable/ic_add_to_photos_white_36dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+            <TextView
+                android:text="稍后播"
+                android:textColor="@color/md_white_1000"
+                android:textSize="18sp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+        </LinearLayout>
+        <LinearLayout
+            android:weightSum="1"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+            <ImageView
+                android:src="@drawable/ic_playlist_add_white_36dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+            <TextView
+                android:text="添加"
+                android:textColor="@color/md_white_1000"
+                android:gravity="center"
+                android:textSize="18sp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+        </LinearLayout>
+        <LinearLayout
+            android:weightSum="1"
+            android:layout_marginEnd="16dp"
+            android:gravity="center"
+            android:layout_gravity="end|center_vertical"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+            <ImageView
+                android:src="@drawable/ic_delete_white_36dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+            <TextView
+                android:text="删除"
+                android:textColor="@color/md_white_1000"
+                android:textSize="18sp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+        </LinearLayout>
+
+    </FrameLayout>
+
+
+</RelativeLayout>

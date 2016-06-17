@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context="com.qiang.meidaproject.ui.activity.SearchActivity">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <include layout="@layout/include_toolbar" android:id="@+id/toolbar_container"/>
+
+        <LinearLayout
+            android:id="@+id/ll_search"
+            android:layout_below="@+id/toolbar_container"
+            android:layout_width="match_parent"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:layout_height="68dp">
+            <EditText
+                android:layout_weight="4"
+                android:layout_width="wrap_content"
+                android:background="@null"
+                android:layout_height="match_parent"/>
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center_vertical"
+                android:layout_height="match_parent">
+                <View
+                    android:background="@color/md_grey_300"
+                    android:layout_alignParentStart="true"
+                    android:layout_width="1dp"
+                    android:layout_height="36dp"/>
+                <ImageView
+                    android:layout_centerHorizontal="true"
+                    android:src="@drawable/ic_search_white_36dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+
+            </RelativeLayout>
+
+        </LinearLayout>
+        <TextView
+            android:id="@+id/tv_result_count"
+            android:text="共找到100个结果"
+            android:textSize="15sp"
+            android:paddingStart="16dp"
+            android:paddingEnd="16dp"
+            android:gravity="center_vertical"
+            android:background="@color/md_grey_300"
+            android:layout_below="@+id/ll_search"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"/>
+        <TextView
+            android:id="@+id/tv_local_music"
+            android:layout_below="@+id/tv_result_count"
+            android:gravity="center_vertical"
+            android:paddingStart="16dp"
+            android:paddingEnd="16dp"
+            android:textSize="18sp"
+            android:textColor="@color/md_blue_400"
+            android:text="本地音乐"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"/>
+        <View
+            android:id="@+id/v_blue_line1"
+            android:layout_below="@+id/tv_local_music"
+            android:background="@color/md_blue_400"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"/>
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/rv_local_music"
+            android:layout_below="@+id/v_blue_line1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+        <TextView
+            android:id="@+id/tv_net_music"
+            android:layout_below="@+id/rv_local_music"
+            android:gravity="center_vertical"
+            android:paddingStart="16dp"
+            android:paddingEnd="16dp"
+            android:textSize="18sp"
+            android:textColor="@color/md_blue_400"
+            android:text="本地音乐"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"/>
+        <View
+            android:id="@+id/v_blue_line2"
+            android:layout_below="@+id/tv_net_music"
+            android:background="@color/md_blue_400"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"/>
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/rv_net_music"
+            android:layout_below="@+id/v_blue_line2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+    </RelativeLayout>
+
+    <android.support.v7.widget.CardView
+        android:id="@+id/controls_container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        app:cardElevation="8dp">
+
+        <fragment android:name="com.qiang.meidaproject.ui.fragment.PlaybackControlsFragment"
+                  android:id="@+id/fragment_playback_controls"
+                  android:layout_width="match_parent"
+                  android:layout_height="wrap_content"
+                  android:layout_alignParentBottom="true"
+                  tools:layout="@layout/fragment_playback_controls" />
+
+    </android.support.v7.widget.CardView>
+
+
+</FrameLayout>
