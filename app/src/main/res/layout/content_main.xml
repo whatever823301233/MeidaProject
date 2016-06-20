@@ -35,6 +35,7 @@
 
         <EditText
             android:id="@+id/edit_query"
+            android:focusableInTouchMode="false"
             android:layout_width="180dp"
             android:layout_weight="3"
             android:hint="一次就好"
@@ -61,7 +62,7 @@
         android:layout_marginEnd="10dp"
         android:layout_height="164dp">
         <LinearLayout
-            android:id="@+id/ll_music_queue"
+            android:id="@+id/llMusicQueue"
             android:gravity="center_vertical"
             android:orientation="horizontal"
             android:layout_width="match_parent"
@@ -107,7 +108,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
             <LinearLayout
-                android:id="@+id/ll_favourite_queue"
+                android:id="@+id/llFavouriteQueue"
                 android:layout_width="0dp"
                 android:layout_weight="1"
                 android:orientation="vertical"
@@ -125,7 +126,7 @@
                     android:layout_height="wrap_content"/>
             </LinearLayout>
             <LinearLayout
-                android:id="@+id/ll_my_queue"
+                android:id="@+id/llMyQueue"
                 android:layout_width="0dp"
                 android:layout_weight="1"
                 android:orientation="vertical"
@@ -142,7 +143,7 @@
                     android:layout_height="wrap_content"/>
             </LinearLayout>
             <LinearLayout
-                android:id="@+id/ll_download_manage"
+                android:id="@+id/llDownloadManage"
                 android:layout_width="0dp"
                 android:layout_weight="1"
                 android:orientation="vertical"
@@ -159,7 +160,7 @@
                     android:layout_height="wrap_content"/>
             </LinearLayout>
             <LinearLayout
-                android:id="@+id/ll_recent_queue"
+                android:id="@+id/llRecentQueue"
                 android:layout_width="0dp"
                 android:layout_weight="1"
                 android:orientation="vertical"
@@ -179,6 +180,7 @@
     </LinearLayout>
 
     <LinearLayout
+        android:id="@+id/llMusicLibrary"
         android:layout_marginTop="10dp"
         android:layout_marginStart="10dp"
         android:layout_marginEnd="10dp"

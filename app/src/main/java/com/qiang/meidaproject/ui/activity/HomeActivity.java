@@ -29,7 +29,6 @@ public class HomeActivity extends BaseActivity implements MediaBrowserFragment.M
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
-
         initializeToolbar();
         initializeFromParams(savedInstanceState, getIntent());
 

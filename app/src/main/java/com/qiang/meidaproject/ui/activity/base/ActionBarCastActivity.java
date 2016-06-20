@@ -1,5 +1,6 @@
 package com.qiang.meidaproject.ui.activity.base;
 
+import android.app.Activity;
 import android.app.ActivityOptions;
 import android.app.FragmentManager;
 import android.content.Intent;
@@ -16,9 +17,9 @@ import android.view.MenuItem;
 import android.view.View;
 
 import com.qiang.meidaproject.R;
+import com.qiang.meidaproject.common.utils.LogUtil;
 import com.qiang.meidaproject.ui.activity.MusicPlayerActivity;
 import com.qiang.meidaproject.ui.activity.PlaceholderActivity;
-import com.qiang.meidaproject.common.utils.LogUtil;
 
 /**
  * Created by Qiang on 2016/3/28.
@@ -73,7 +74,8 @@ public abstract class ActionBarCastActivity extends AppCompatActivity {
                         break;
                 }
                 if (activityClass != null) {
-                    startActivity(new Intent(ActionBarCastActivity.this, activityClass), extras);
+                    Intent intent=new Intent(getActivity(), activityClass);
+                    startActivity(intent, extras);
                     finish();
                 }
             }
@@ -258,6 +260,10 @@ public abstract class ActionBarCastActivity extends AppCompatActivity {
         if (isRoot) {
             mDrawerToggle.syncState();
         }
+    }
+
+    public Activity getActivity(){
+        return this;
     }
 
     /**

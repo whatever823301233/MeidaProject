@@ -31,7 +31,7 @@ public abstract class BaseActivity extends ActionBarCastActivity implements Medi
     /**
      * 类唯一标记
      */
-    private String TAG = getClass().getSimpleName();
+    protected String TAG = getClass().getSimpleName();
     private MediaBrowser mMediaBrowser;
     private PlaybackControlsFragment mControlsFragment;
 

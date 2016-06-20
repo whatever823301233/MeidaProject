@@ -17,7 +17,7 @@ public class NowPlayingActivity extends BaseActivity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_now_playing);
-
+        initializeToolbar();
         Intent newIntent;
         /**判断是否为  电视模式*/
         UiModeManager uiModeManager = (UiModeManager) getSystemService(UI_MODE_SERVICE);
