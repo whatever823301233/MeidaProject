@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     android:id="@+id/drawer_layout"
     android:fitsSystemWindows="true"
-    tools:context=".ui.activity.HomeActivity">
+    tools:context=".activity.HomeActivity">
 
     <FrameLayout
         android:layout_width="match_parent"
@@ -117,7 +117,7 @@
             android:layout_height="wrap_content"
             app:cardElevation="8dp">
 
-            <fragment android:name="com.qiang.meidaproject.ui.fragment.PlaybackControlsFragment"
+            <fragment android:name="com.qiang.meidaproject.fragment.PlaybackControlsFragment"
                 android:id="@+id/fragment_playback_controls"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

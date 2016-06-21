@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
-    tools:context="com.qiang.meidaproject.ui.activity.MyMusicMenuActivity">
+    tools:context=".activity.MyMusicMenuActivity">
 
     <include layout="@layout/include_toolbar" android:id="@+id/toolbar_container"/>
 
@@ -36,7 +36,7 @@
         android:layout_gravity="bottom"
         app:cardElevation="8dp">
 
-        <fragment android:name="com.qiang.meidaproject.ui.fragment.PlaybackControlsFragment"
+        <fragment android:name="com.qiang.meidaproject.fragment.PlaybackControlsFragment"
                   android:id="@+id/fragment_playback_controls"
                   android:layout_width="match_parent"
                   android:layout_height="wrap_content"

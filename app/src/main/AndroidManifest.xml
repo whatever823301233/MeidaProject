@@ -36,9 +36,9 @@
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:theme="@style/AppTheme">
-        <activity android:name=".ui.activity.HomeActivity"></activity>
+        <activity android:name=".activity.HomeActivity"></activity>
         <activity
-            android:name=".ui.activity.MainActivity"
+            android:name=".activity.MainActivity"
             android:label="@string/app_name">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -46,18 +46,18 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".ui.activity.FavouriteActivity"></activity>
-        <activity android:name=".ui.activity.MusicPlayerActivity"></activity>
-        <activity android:name=".ui.activity.NowPlayingActivity"></activity>
-        <activity android:name=".ui.activity.FullScreenPlayerActivity"></activity>
-        <activity android:name=".ui.activity.PlaceholderActivity" />
+        <activity android:name=".activity.FavouriteActivity"></activity>
+        <activity android:name=".activity.MusicPlayerActivity"></activity>
+        <activity android:name=".activity.NowPlayingActivity"></activity>
+        <activity android:name=".activity.FullScreenPlayerActivity"></activity>
+        <activity android:name=".activity.PlaceholderActivity" />
         <activity
-            android:name=".ui.activity.TestActivity"
+            android:name=".activity.TestActivity"
             android:label="@string/title_activity_test"
             android:theme="@style/AppTheme"></activity>
 
         <service
-            android:name=".model.service.MusicService"
+            android:name=".service.MusicService"
             android:exported="true"
             tools:ignore="ExportedService">
             <intent-filter>
@@ -65,11 +65,11 @@
             </intent-filter>
         </service>
 
-        <activity android:name=".ui.activity.MyMusicMenuActivity"></activity>
-        <activity android:name=".ui.activity.DownloadManageActivity"></activity>
-        <activity android:name=".ui.activity.RecentPlayActivity"></activity>
-        <activity android:name=".ui.activity.SearchActivity"></activity>
-        <activity android:name=".ui.activity.MusicLibraryActivity"></activity>
+        <activity android:name=".activity.MyMusicMenuActivity"></activity>
+        <activity android:name=".activity.DownloadManageActivity"></activity>
+        <activity android:name=".activity.RecentPlayActivity"></activity>
+        <activity android:name=".activity.SearchActivity"></activity>
+        <activity android:name=".activity.MusicLibraryActivity"></activity>
     </application>
 
 </manifest>

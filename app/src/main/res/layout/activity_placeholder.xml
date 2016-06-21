@@ -22,7 +22,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
-    tools:context=".ui.activity.MusicPlayerActivity">
+    tools:context=".activity.MusicPlayerActivity">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -46,7 +46,7 @@
             android:layout_alignParentBottom="true"
             app:cardElevation="8dp">
 
-            <fragment android:name="com.qiang.meidaproject.ui.fragment.PlaybackControlsFragment"
+            <fragment android:name="com.qiang.meidaproject.fragment.PlaybackControlsFragment"
                 android:id="@+id/fragment_playback_controls"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

@@ -4,8 +4,6 @@ import android.app.ActivityManager;
 import android.app.Application;
 import android.text.TextUtils;
 
-import com.qiang.meidaproject.common.AppManager;
-
 import java.util.Iterator;
 
 /**

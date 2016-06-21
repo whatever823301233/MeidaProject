@@ -7,7 +7,7 @@
     android:background="@android:color/black"
     android:fitsSystemWindows="true"
     android:id="@+id/pageView"
-    tools:context=".ui.activity.FullScreenPlayerActivity">
+    tools:context=".activity.FullScreenPlayerActivity">
 
 
     <ImageView
