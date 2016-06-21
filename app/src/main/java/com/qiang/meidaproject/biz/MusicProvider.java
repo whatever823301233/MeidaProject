@@ -229,21 +229,6 @@ public class MusicProvider {
             if (mCurrentState == State.NON_INITIALIZED) {
                 mCurrentState = State.INITIALIZING;
 
-                /*int slashPos = CATALOG_URL.lastIndexOf('/');
-                String path = CATALOG_URL.substring(0, slashPos + 1);
-                JSONObject jsonObj = fetchJSONFromUrl(CATALOG_URL);
-                if (jsonObj == null) {
-                    return;
-                }
-                JSONArray tracks = jsonObj.getJSONArray(JSON_MUSIC);
-                if (tracks != null) {
-                    for (int j = 0; j < tracks.length(); j++) {
-                        MediaMetadata item = buildFromJSON(tracks.getJSONObject(j), path);
-                        String musicId = item.getString(MediaMetadata.METADATA_KEY_MEDIA_ID);
-                        mMusicListById.put(musicId, new MutableMediaMetadata(musicId, item));
-                    }
-                    buildListsByGenre();
-                }*/
                 Cursor cursor = MyApplication.get().getContentResolver().query(
                         MediaStore.Audio.Media.EXTERNAL_CONTENT_URI,
                         null,// 字段　没有字段　就是查询所有信息　相当于SQL语句中的　“ * ”

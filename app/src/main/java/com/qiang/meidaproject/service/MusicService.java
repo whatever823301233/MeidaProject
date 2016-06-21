@@ -9,7 +9,6 @@ import android.media.MediaMetadata;
 import android.media.browse.MediaBrowser;
 import android.media.session.MediaSession;
 import android.media.session.PlaybackState;
-import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -18,13 +17,13 @@ import android.service.media.MediaBrowserService;
 import android.support.annotation.NonNull;
 import android.text.TextUtils;
 
-import com.qiang.meidaproject.biz.AlbumArtCache;
 import com.qiang.meidaproject.LocalPlayback;
 import com.qiang.meidaproject.MediaNotificationManager;
-import com.qiang.meidaproject.biz.MusicProvider;
 import com.qiang.meidaproject.Playback;
 import com.qiang.meidaproject.R;
 import com.qiang.meidaproject.activity.NowPlayingActivity;
+import com.qiang.meidaproject.biz.AlbumArtCache;
+import com.qiang.meidaproject.biz.MusicProvider;
 import com.qiang.meidaproject.utils.LogUtil;
 import com.qiang.meidaproject.utils.MediaIDHelper;
 import com.qiang.meidaproject.utils.QueueHelper;
@@ -170,8 +169,6 @@ public class MusicService extends MediaBrowserService implements Playback.Callba
 
         mMediaNotificationManager = new MediaNotificationManager(this);
 
-
-
     }
 
     /**
@@ -221,7 +218,7 @@ public class MusicService extends MediaBrowserService implements Playback.Callba
                 "; clientUid=" + clientUid + " ; rootHints=", rootHints);
         // To ensure you are not allowing any arbitrary app to browse your app's contents, you
         // need to check the origin:
-        return new BrowserRoot(MEDIA_ID_ROOT, null);
+        return new BrowserRoot(MEDIA_ID_MUSICS_BY_GENRE, null);//MEDIA_ID_ROOT
     }
 
     @Override
@@ -264,8 +261,10 @@ public class MusicService extends MediaBrowserService implements Playback.Callba
             mediaItems.add(new MediaBrowser.MediaItem(
                     new MediaDescription.Builder()
                             .setMediaId(MEDIA_ID_MUSICS_BY_GENRE)
+                           // .setTitle(getString(R.string.browse_genres))
                             .setTitle(getString(R.string.browse_genres))
-                            .setIconUri(Uri.parse("android.resource://com.qiang.mediaProject/drawable/ic_by_genre"))
+
+                           // .setIconUri(Uri.parse("android.resource://com.qiang.mediaProject/drawable/ic_by_genre"))
                             .setSubtitle(getString(R.string.browse_genre_subtitle))
                             .build(), MediaBrowser.MediaItem.FLAG_BROWSABLE
             ));
@@ -311,6 +310,7 @@ public class MusicService extends MediaBrowserService implements Playback.Callba
     }
 
     private final class MediaSessionCallback extends MediaSession.Callback {
+
         @Override
         public void onPlay() {
             LogUtil.d(TAG, "play");

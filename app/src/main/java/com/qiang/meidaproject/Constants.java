@@ -26,7 +26,6 @@ public class Constants {
 
     public static String sHostUrl;
 
-
     private Constants( Context context ) {
 
         mContext = context.getApplicationContext();
