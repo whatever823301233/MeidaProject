@@ -243,8 +243,11 @@ public class MusicProvider {
                 for (int i = 0; i < cursor.getCount(); i++) {
                     cursor.moveToNext();
                     MediaMetadata item=buildFromCursor(cursor, null);
-                    String musicId = item.getString(MediaMetadata.METADATA_KEY_MEDIA_ID);
-                    mMusicListById.put(musicId,new MutableMediaMetadata(musicId, item));
+                    long duration=item.getLong(MediaMetadata.METADATA_KEY_DURATION);
+                    if(duration>180000){
+                        String musicId = item.getString(MediaMetadata.METADATA_KEY_MEDIA_ID);
+                        mMusicListById.put(musicId,new MutableMediaMetadata(musicId, item));
+                    }
                 }
                 cursor.close();
                 buildListsByGenre();
