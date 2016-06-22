@@ -8,6 +8,7 @@ import android.content.IntentFilter;
 import android.media.MediaMetadata;
 import android.media.browse.MediaBrowser;
 import android.media.session.MediaController;
+import android.media.session.MediaSession;
 import android.media.session.PlaybackState;
 import android.net.ConnectivityManager;
 import android.os.Bundle;
@@ -22,12 +23,12 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.qiang.meidaproject.R;
-import com.qiang.meidaproject.utils.LogUtil;
-import com.qiang.meidaproject.utils.MediaIDHelper;
-import com.qiang.meidaproject.utils.NetworkHelper;
 import com.qiang.meidaproject.activity.base.MediaBrowserProvider;
 import com.qiang.meidaproject.adapter.MediaItemViewHolder;
 import com.qiang.meidaproject.fragment.base.BaseFragment;
+import com.qiang.meidaproject.utils.LogUtil;
+import com.qiang.meidaproject.utils.MediaIDHelper;
+import com.qiang.meidaproject.utils.NetworkHelper;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -91,10 +92,16 @@ public class MediaBrowserFragment extends BaseFragment {
             checkForUserVisibleErrors(false);
             mBrowserAdapter.notifyDataSetChanged();
         }
+
+        @Override
+        public void onQueueChanged(List<MediaSession.QueueItem> queue) {
+            super.onQueueChanged(queue);
+        }
     };
 
     private final MediaBrowser.SubscriptionCallback mSubscriptionCallback =
             new MediaBrowser.SubscriptionCallback() {
+
                 @Override
                 public void onChildrenLoaded(@NonNull String parentId,
                                              @NonNull List<MediaBrowser.MediaItem> children) {
@@ -103,7 +110,8 @@ public class MediaBrowserFragment extends BaseFragment {
                         checkForUserVisibleErrors(children.isEmpty());
                         mBrowserAdapter.clear();
                         for (MediaBrowser.MediaItem item : children) {
-                            mBrowserAdapter.add(item);
+                            boolean isPlayable=item.isPlayable();
+                                mBrowserAdapter.add(item);
                         }
                         mBrowserAdapter.notifyDataSetChanged();
                     } catch (Throwable t) {
@@ -118,6 +126,7 @@ public class MediaBrowserFragment extends BaseFragment {
                     checkForUserVisibleErrors(true);
                 }
             };
+
 
     @Override
     public void onAttach(Activity activity) {
@@ -229,7 +238,6 @@ public class MediaBrowserFragment extends BaseFragment {
         mMediaFragmentListener.getMediaBrowser().unsubscribe(mMediaId);
 
         mMediaFragmentListener.getMediaBrowser().subscribe(mMediaId, mSubscriptionCallback);
-
         // Add MediaController callback so we can redraw the list when metadata changes:
         if (getActivity().getMediaController() != null) {
             getActivity().getMediaController().registerCallback(mMediaControllerCallback);
@@ -297,8 +305,7 @@ public class MediaBrowserFragment extends BaseFragment {
                             LogUtil.d(TAG, "child ", item.getMediaId());
                             if (item.getMediaId().equals(mMediaId)) {
                                 if (mMediaFragmentListener != null) {
-                                    mMediaFragmentListener.setToolbarTitle(
-                                            item.getDescription().getTitle());
+                                    mMediaFragmentListener.setToolbarTitle(item.getDescription().getTitle());
                                 }
                                 return;
                             }
@@ -332,8 +339,7 @@ public class MediaBrowserFragment extends BaseFragment {
                 MediaController controller = ((Activity) getContext()).getMediaController();
                 if (controller != null && controller.getMetadata() != null) {
                     String currentPlaying = controller.getMetadata().getDescription().getMediaId();
-                    String musicId = MediaIDHelper.extractMusicIDFromMediaID(
-                            item.getDescription().getMediaId());
+                    String musicId = MediaIDHelper.extractMusicIDFromMediaID(item.getDescription().getMediaId());
                     if (currentPlaying != null && currentPlaying.equals(musicId)) {
                         PlaybackState pbState = controller.getPlaybackState();
                         if (pbState == null || pbState.getState() == PlaybackState.STATE_ERROR) {

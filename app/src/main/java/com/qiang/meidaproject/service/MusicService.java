@@ -4,7 +4,6 @@ import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
-import android.media.MediaDescription;
 import android.media.MediaMetadata;
 import android.media.browse.MediaBrowser;
 import android.media.session.MediaSession;
@@ -34,8 +33,6 @@ import java.util.Collections;
 import java.util.List;
 
 import static com.qiang.meidaproject.utils.MediaIDHelper.MEDIA_ID_MUSICS_BY_GENRE;
-import static com.qiang.meidaproject.utils.MediaIDHelper.MEDIA_ID_ROOT;
-import static com.qiang.meidaproject.utils.MediaIDHelper.createBrowseCategoryMediaID;
 
 
 /**
@@ -212,10 +209,11 @@ public class MusicService extends MediaBrowserService implements Playback.Callba
     }
 
     @Override
-    public BrowserRoot onGetRoot(@NonNull String clientPackageName, int clientUid,
-                                 Bundle rootHints) {
-        LogUtil.d(TAG, "OnGetRoot: clientPackageName=" + clientPackageName,
-                "; clientUid=" + clientUid + " ; rootHints=", rootHints);
+    public BrowserRoot onGetRoot(@NonNull String clientPackageName, int clientUid, Bundle rootHints) {
+        LogUtil.d(TAG,
+                "OnGetRoot: clientPackageName=" + clientPackageName,
+                "; clientUid=" + clientUid
+                        + " ; rootHints=", rootHints);
         // To ensure you are not allowing any arbitrary app to browse your app's contents, you
         // need to check the origin:
         return new BrowserRoot(MEDIA_ID_MUSICS_BY_GENRE, null);//MEDIA_ID_ROOT
@@ -256,18 +254,19 @@ public class MusicService extends MediaBrowserService implements Playback.Callba
 
         List<MediaBrowser.MediaItem> mediaItems = new ArrayList<>();
 
-        if (MEDIA_ID_ROOT.equals(parentMediaId)) {
+        /*if (MEDIA_ID_ROOT.equals(parentMediaId)) {
             LogUtil.d(TAG, "OnLoadChildren.ROOT");
-            mediaItems.add(new MediaBrowser.MediaItem(
-                    new MediaDescription.Builder()
-                            .setMediaId(MEDIA_ID_MUSICS_BY_GENRE)
-                           // .setTitle(getString(R.string.browse_genres))
-                            .setTitle(getString(R.string.browse_genres))
-
-                           // .setIconUri(Uri.parse("android.resource://com.qiang.mediaProject/drawable/ic_by_genre"))
-                            .setSubtitle(getString(R.string.browse_genre_subtitle))
-                            .build(), MediaBrowser.MediaItem.FLAG_BROWSABLE
-            ));
+            mediaItems.add(
+                    new MediaBrowser.MediaItem(
+                            new MediaDescription.Builder()
+                                    .setMediaId(MEDIA_ID_MUSICS_BY_GENRE)
+                                    // .setTitle(getString(R.string.browse_genres))
+                                    .setTitle(getString(R.string.browse_genres))
+                                    // .setIconUri(Uri.parse("android.resource://com.qiang.mediaProject/drawable/ic_by_genre"))
+                                    .setSubtitle(getString(R.string.browse_genre_subtitle))
+                                    .build(),
+                            MediaBrowser.MediaItem.FLAG_BROWSABLE
+                    ));
 
         } else if (MEDIA_ID_MUSICS_BY_GENRE.equals(parentMediaId)) {
             LogUtil.d(TAG, "OnLoadChildren.GENRES");
@@ -277,14 +276,20 @@ public class MusicService extends MediaBrowserService implements Playback.Callba
                                 .setMediaId(createBrowseCategoryMediaID(MEDIA_ID_MUSICS_BY_GENRE, genre))
                                 .setTitle(genre)
                                 .setSubtitle(getString(R.string.browse_musics_by_genre_subtitle, genre))
-                                .build(), MediaBrowser.MediaItem.FLAG_BROWSABLE
+                                .build(),
+                        MediaBrowser.MediaItem.FLAG_BROWSABLE
                 );
                 mediaItems.add(item);
             }
 
-        } else if (parentMediaId.startsWith(MEDIA_ID_MUSICS_BY_GENRE)) {
-            String genre = MediaIDHelper.getHierarchy(parentMediaId)[1];
-            LogUtil.d(TAG, "OnLoadChildren.SONGS_BY_GENRE  genre=", genre);
+        } else if (parentMediaId.startsWith(MEDIA_ID_MUSICS_BY_GENRE)) {*/
+            //String genre = MediaIDHelper.getHierarchy(parentMediaId)[1];
+
+        if(mMusicProvider.getGenres()==null){return;}
+
+        for(String genre:mMusicProvider.getGenres()){
+
+            //LogUtil.d(TAG, "OnLoadChildren.SONGS_BY_GENRE  genre=", genre);
             for (MediaMetadata track : mMusicProvider.getMusicsByGenre(genre)) {
                 // Since mediaMetadata fields are immutable, we need to create a copy, so we
                 // can set a hierarchy-aware mediaID. We will need to know the media hierarchy
@@ -301,11 +306,16 @@ public class MusicService extends MediaBrowserService implements Playback.Callba
                         trackCopy.getDescription(), MediaBrowser.MediaItem.FLAG_PLAYABLE);
                 mediaItems.add(bItem);
             }
-        } else {
-            LogUtil.w(TAG, "Skipping unmatched parentMediaId: ", parentMediaId);
         }
-        LogUtil.d(TAG, "OnLoadChildren sending ", mediaItems.size(),
-                " results for ", parentMediaId);
+
+        /*} else {
+            LogUtil.w(TAG, "Skipping unmatched parentMediaId: ", parentMediaId);
+        }*/
+
+
+
+
+        LogUtil.d(TAG, "OnLoadChildren sending ", mediaItems.size(), " results for ", parentMediaId);
         result.sendResult(mediaItems);
     }
 
@@ -588,9 +598,9 @@ public class MusicService extends MediaBrowserService implements Playback.Callba
                             // example, on the lockscreen background when the media session is active.
                             .putBitmap(MediaMetadata.METADATA_KEY_ALBUM_ART, bitmap)
 
-                                    // set small version of the album art in the DISPLAY_ICON. This is used on
-                                    // the MediaDescription and thus it should be small to be serialized if
-                                    // necessary..
+                            // set small version of the album art in the DISPLAY_ICON. This is used on
+                            // the MediaDescription and thus it should be small to be serialized if
+                            // necessary..
                             .putBitmap(MediaMetadata.METADATA_KEY_DISPLAY_ICON, icon)
 
                             .build();

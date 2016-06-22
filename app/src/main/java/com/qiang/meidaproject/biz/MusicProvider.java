@@ -84,6 +84,7 @@ public class MusicProvider {
         return mMusicListByGenre.keySet();
     }
 
+
     /**
      * Get music tracks of the given genre
      *
