@@ -253,42 +253,8 @@ public class MusicService extends MediaBrowserService implements Playback.Callba
         LogUtil.d(TAG, "OnLoadChildren: parentMediaId=", parentMediaId);
 
         List<MediaBrowser.MediaItem> mediaItems = new ArrayList<>();
-
-        /*if (MEDIA_ID_ROOT.equals(parentMediaId)) {
-            LogUtil.d(TAG, "OnLoadChildren.ROOT");
-            mediaItems.add(
-                    new MediaBrowser.MediaItem(
-                            new MediaDescription.Builder()
-                                    .setMediaId(MEDIA_ID_MUSICS_BY_GENRE)
-                                    // .setTitle(getString(R.string.browse_genres))
-                                    .setTitle(getString(R.string.browse_genres))
-                                    // .setIconUri(Uri.parse("android.resource://com.qiang.mediaProject/drawable/ic_by_genre"))
-                                    .setSubtitle(getString(R.string.browse_genre_subtitle))
-                                    .build(),
-                            MediaBrowser.MediaItem.FLAG_BROWSABLE
-                    ));
-
-        } else if (MEDIA_ID_MUSICS_BY_GENRE.equals(parentMediaId)) {
-            LogUtil.d(TAG, "OnLoadChildren.GENRES");
-            for (String genre : mMusicProvider.getGenres()) {
-                MediaBrowser.MediaItem item = new MediaBrowser.MediaItem(
-                        new MediaDescription.Builder()
-                                .setMediaId(createBrowseCategoryMediaID(MEDIA_ID_MUSICS_BY_GENRE, genre))
-                                .setTitle(genre)
-                                .setSubtitle(getString(R.string.browse_musics_by_genre_subtitle, genre))
-                                .build(),
-                        MediaBrowser.MediaItem.FLAG_BROWSABLE
-                );
-                mediaItems.add(item);
-            }
-
-        } else if (parentMediaId.startsWith(MEDIA_ID_MUSICS_BY_GENRE)) {*/
-            //String genre = MediaIDHelper.getHierarchy(parentMediaId)[1];
-
         if(mMusicProvider.getGenres()==null){return;}
-
         for(String genre:mMusicProvider.getGenres()){
-
             //LogUtil.d(TAG, "OnLoadChildren.SONGS_BY_GENRE  genre=", genre);
             for (MediaMetadata track : mMusicProvider.getMusicsByGenre(genre)) {
                 // Since mediaMetadata fields are immutable, we need to create a copy, so we
@@ -307,14 +273,6 @@ public class MusicService extends MediaBrowserService implements Playback.Callba
                 mediaItems.add(bItem);
             }
         }
-
-        /*} else {
-            LogUtil.w(TAG, "Skipping unmatched parentMediaId: ", parentMediaId);
-        }*/
-
-
-
-
         LogUtil.d(TAG, "OnLoadChildren sending ", mediaItems.size(), " results for ", parentMediaId);
         result.sendResult(mediaItems);
     }
